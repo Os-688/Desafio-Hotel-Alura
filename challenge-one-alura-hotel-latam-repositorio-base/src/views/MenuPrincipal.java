@@ -13,6 +13,7 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -78,7 +79,7 @@ public class MenuPrincipal extends JFrame {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblCopyR = new JLabel("Desarrollado por Fulanita de Tal © 2023");
+		JLabel lblCopyR = new JLabel("Desarrollado por Oscar © 2023");
 		lblCopyR.setBounds(315, 11, 284, 19);
 		lblCopyR.setForeground(new Color(240, 248, 255));
 		lblCopyR.setFont(new Font("Roboto", Font.PLAIN, 16));
@@ -109,7 +110,11 @@ public class MenuPrincipal extends JFrame {
 		btnexit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.exit(0);
+				int showConfirmDialog = JOptionPane.showConfirmDialog(null,"Realmente desea salir de la aplicacion");
+				if (showConfirmDialog == 0) {
+					System.exit(0);
+				}
+
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {
