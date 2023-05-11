@@ -4,6 +4,10 @@
 
 <br>
   <h3 align = "center"> VIDEO DE MUESTRA: <h3>
+
+https://github.com/Os-688/Desafio-Hotel-Alura/assets/122639240/70ea4800-0844-448f-a877-0ab80f30e88e
+
+
 <br>
   
 <h2 align = "center"> Descripción del desafio: </h2>
