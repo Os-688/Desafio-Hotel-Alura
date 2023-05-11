@@ -24,7 +24,7 @@ El proyecto necesita de dos claves el usuario y la contraseña para comenzar. Es
 * Puede buscar por apellido o id a cualquier huesped o reserva.
 * calcula el valor de el hospedaje.
 
-### _Tecnologia utilizadas:
+### _Tecnologia utilizadas:_
 * Java 8.
 * MySQL.
 * JDBC.
