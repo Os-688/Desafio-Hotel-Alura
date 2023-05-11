@@ -1,4 +1,5 @@
-![Ha-100px](https://github.com/Os-688/Desafio-Hotel-Alura/assets/122639240/d655e6f1-d51d-49d8-a86b-38ac48342ffd)
+![Ha-100px](https://github.com/Os-688/Desafio-Hotel-Alura/assets/122639240/d655e6f1-d51d-49d8-a86b-38ac48342ffd).........................................................................................................................................................................................................
+![Mi proyecto](https://github.com/Os-688/Desafio-Hotel-Alura/assets/122639240/ec73189b-b5ee-46f0-a4df-677b0c15ee79)
 
 <h1 align = "center">Resolución del desafio Hotel Alura. </h1>
 
