@@ -13,8 +13,10 @@ import java.text.Format;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -23,9 +25,15 @@ import javax.swing.border.EmptyBorder;
 
 import com.toedter.calendar.JDateChooser;
 
+import jdbc.controller.HuespedesController;
+import jdbc.controller.ReservasController;
+import jdbc.modelo.Huespedes;
+
 @SuppressWarnings("serial")
 public class RegistroHuesped extends JFrame {
-
+	
+	private HuespedesController huespedesController;
+	private ReservasController reservasController;
 	private JPanel contentPane;
 	private JTextField txtNombre;
 	private JTextField txtApellido;
@@ -44,7 +52,7 @@ public class RegistroHuesped extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RegistroHuesped frame = new RegistroHuesped();
+					RegistroHuesped frame = new RegistroHuesped(0);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,7 +64,10 @@ public class RegistroHuesped extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RegistroHuesped() {
+	public RegistroHuesped(int idReserva) {
+		
+		this.huespedesController = new HuespedesController();
+		this.reservasController =  new ReservasController();
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroHuesped.class.getResource("/imagenes/lOGO-50PX.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -149,7 +160,7 @@ public class RegistroHuesped extends JFrame {
 		txtNacionalidad.setBounds(560, 350, 289, 36);
 		txtNacionalidad.setBackground(SystemColor.text);
 		txtNacionalidad.setFont(new Font("Roboto", Font.PLAIN, 16));
-		txtNacionalidad.setModel(new DefaultComboBoxModel(new String[] {"afgano-afgana", "alemán-", "alemana", "árabe-árabe", "argentino-argentina", "australiano-australiana", "belga-belga", "boliviano-boliviana", "brasileño-brasileña", "camboyano-camboyana", "canadiense-canadiense", "chileno-chilena", "chino-china", "colombiano-colombiana", "coreano-coreana", "costarricense-costarricense", "cubano-cubana", "danés-danesa", "ecuatoriano-ecuatoriana", "egipcio-egipcia", "salvadoreño-salvadoreña", "escocés-escocesa", "español-española", "estadounidense-estadounidense", "estonio-estonia", "etiope-etiope", "filipino-filipina", "finlandés-finlandesa", "francés-francesa", "galés-galesa", "griego-griega", "guatemalteco-guatemalteca", "haitiano-haitiana", "holandés-holandesa", "hondureño-hondureña", "indonés-indonesa", "inglés-inglesa", "iraquí-iraquí", "iraní-iraní", "irlandés-irlandesa", "israelí-israelí", "italiano-italiana", "japonés-japonesa", "jordano-jordana", "laosiano-laosiana", "letón-letona", "letonés-letonesa", "malayo-malaya", "marroquí-marroquí", "mexicano-mexicana", "nicaragüense-nicaragüense", "noruego-noruega", "neozelandés-neozelandesa", "panameño-panameña", "paraguayo-paraguaya", "peruano-peruana", "polaco-polaca", "portugués-portuguesa", "puertorriqueño-puertorriqueño", "dominicano-dominicana", "rumano-rumana", "ruso-rusa", "sueco-sueca", "suizo-suiza", "tailandés-tailandesa", "taiwanes-taiwanesa", "turco-turca", "ucraniano-ucraniana", "uruguayo-uruguaya", "venezolano-venezolana", "vietnamita-vietnamita"}));
+		txtNacionalidad.setModel(new DefaultComboBoxModel(new String[] {"Afganista", "Alemania", "Arabia", "Argentina", "Australia", "Belgica", "Bolivia", "Brasil", "Camboya", "Canada", "Chile", "China", "Colombia", "Corea", "Costa Rica", "Cuba", "Dinamarca", "Ecuador", "Egipto", "Salvador", "Escocia", "España", "Estados Unidos", "Estonia", "Etiopia", "Filipinas", "Finlandia", "Francia", "Gales", "Grecia", "Guatemala", "Haiti", "Holanda", "Honduras", "Indonésia", "Inglaterra", "Irak", "Iran", "Irlanda", "Israel", "Italia", "Japon", "Jordania", "Pueblo Laosiano", "Letonia", "Malayo", "Marruecos", "Mexico", "Nicaragüa", "Noruega", "Nueva Zelanda", "Panama", "Paraguay", "Peru", "Polonia", "Portugal", "Puerto Rico", "Republica Dominicana", "Rumania", "Rusia", "Suecia", "Tailandia", "Taiwan", "Turquia", "Ucraniana", "Uruguay", "Venezuela", "Vietnam"}));
 		contentPane.add(txtNacionalidad);
 		
 		JLabel lblNombre = new JLabel("NOMBRE");
@@ -208,7 +219,13 @@ public class RegistroHuesped extends JFrame {
 		txtNreserva.setColumns(10);
 		txtNreserva.setBackground(Color.WHITE);
 		txtNreserva.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		txtNreserva.setEditable(false);
+		String id = String.valueOf(idReserva);
+		txtNreserva.setText(id);
 		contentPane.add(txtNreserva);
+		
+		
+		
 		
 		JSeparator separator_1_2 = new JSeparator();
 		separator_1_2.setBounds(560, 170, 289, 2);
@@ -259,6 +276,19 @@ public class RegistroHuesped extends JFrame {
 		btnguardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 		
 		JLabel labelGuardar = new JLabel("GUARDAR");
+		labelGuardar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if (txtApellido != null && txtTelefono != null) {
+					guardaHuesped();
+					Exito dialog = new Exito();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
+				}
+			}
+		});
 		labelGuardar.setHorizontalAlignment(SwingConstants.CENTER);
 		labelGuardar.setForeground(Color.WHITE);
 		labelGuardar.setFont(new Font("Roboto", Font.PLAIN, 18));
@@ -283,7 +313,7 @@ public class RegistroHuesped extends JFrame {
 		
 		JPanel btnexit = new JPanel();
 		btnexit.setBounds(857, 0, 53, 36);
-		contentPane.add(btnexit);
+		header.add(btnexit);
 		btnexit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -313,6 +343,16 @@ public class RegistroHuesped extends JFrame {
 		labelExit.setFont(new Font("Roboto", Font.PLAIN, 18));
 	}
 	
+	private void guardaHuesped() {
+	
+		String fecha = ((JTextField)txtFechaN.getDateEditor().getUiComponent()).getText();
+		
+		Huespedes nuevoHuesped = new Huespedes(txtNombre.getText(), txtApellido.getText(), java.sql.Date.valueOf(fecha), txtNacionalidad.getSelectedItem().toString(), txtTelefono.getText(), Integer.valueOf(txtNreserva.getText()));
+		huespedesController.guardar(nuevoHuesped);
+		
+		JOptionPane.showMessageDialog(contentPane, "Reserva guardada con exito, id: " + nuevoHuesped.getId());
+	
+	}
 	
 	//Código que permite mover la ventana por la pantalla según la posición de "x" y "y"	
 	 private void headerMousePressed(java.awt.event.MouseEvent evt) {
