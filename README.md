@@ -16,7 +16,6 @@ https://github.com/Os-688/Desafio-Hotel-Alura/assets/122639240/70ea4800-0844-448
 ### _Descripcion de uso:_
 El proyecto necesita de dos claves el usuario y la contraseña para comenzar. Estos proximamente tendran su propia base de datos, por lo tanto ahora mismo son: admin y admin. Hay dos pestañas una para registrar huesped y reserva, otra para hacer busquedas de estas dos tablas.
   
- <br>
   
  ### _Caracteristicas de mi proyecto:_
 * Puede agregar una reserva al hotel.
@@ -25,6 +24,10 @@ El proyecto necesita de dos claves el usuario y la contraseña para comenzar. Es
 * Puede buscar por apellido o id a cualquier huesped o reserva.
 * calcula el valor de el hospedaje.
 
+### _Tecnologia utilizadas:
+* Java 8.
+* MySQL.
+* JDBC.
 
 
   
